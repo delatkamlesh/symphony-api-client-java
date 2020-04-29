@@ -52,10 +52,12 @@
                     <configLocation>ps-style.xml</configLocation>
                     <consoleOutput>true</consoleOutput>
                     <violationSeverity>warning</violationSeverity>
-                    <failOnViolation>false</failOnViolation>
+                    <failOnViolation>true</failOnViolation>
+                    <linkXRef>false</linkXRef>
                 </configuration>
                 <executions>
                     <execution>
+                        <phase>validate</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>

@@ -200,7 +200,8 @@ public final class ConnectionsClient extends APIClient {
     private class UserId {
         private Long userId;
 
-        public UserId() {}
+        public UserId() {
+        }
 
         public UserId(Long userId) {
             this.userId = userId;

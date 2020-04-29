@@ -12,7 +12,8 @@ public class OutboundMessage {
     private File[] attachment;
     private List<ContentAttachment> contentAttachment;
 
-    public OutboundMessage() {}
+    public OutboundMessage() {
+    }
 
     public OutboundMessage(String message) {
         this.message = message;
@@ -30,7 +31,7 @@ public class OutboundMessage {
 
     public OutboundMessage(String message, File attachment) {
         this.message = message;
-        this.attachment = new File[] { attachment };
+        this.attachment = new File[] {attachment};
     }
 
     public OutboundMessage(String message, String data, File[] attachment) {
@@ -42,7 +43,7 @@ public class OutboundMessage {
     public OutboundMessage(String message, String data, File attachment) {
         this.message = message;
         this.data = data;
-        this.attachment = new File[] { attachment };
+        this.attachment = new File[] {attachment};
     }
 
     public OutboundMessage(String message, List<ContentAttachment> contentAttachment) {
@@ -94,12 +95,12 @@ public class OutboundMessage {
     }
 
     public void setAttachment(File attachment) {
-        this.attachment = new File[] { attachment };
+        this.attachment = new File[] {attachment};
     }
 
     public void addAttachment(File attachment) {
         if (this.attachment == null) {
-            this.attachment = new File[] { attachment };
+            this.attachment = new File[] {attachment};
             return;
         }
         File[] newArray = new File[this.attachment.length + 1];
@@ -131,6 +132,6 @@ public class OutboundMessage {
     public boolean hasAttachment() {
         return (this.attachment != null && this.attachment.length > 0 && this.attachment[0] != null)
             || (this.contentAttachment != null && !this.contentAttachment.isEmpty()
-                && this.contentAttachment.get(0) != null);
+            && this.contentAttachment.get(0) != null);
     }
 }

@@ -1,23 +1,20 @@
 package configuration;
 
-import static utils.HttpClientBuilderHelper.getHttpClientBuilderWithTruststore;
-
 import clients.symphony.api.constants.AgentConstants;
 import clients.symphony.api.constants.CommonConstants;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import model.AgentInfo;
 import org.apache.commons.beanutils.BeanUtils;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import static utils.HttpClientBuilderHelper.getHttpClientBuilderWithTruststore;
 
 @Slf4j
 @Getter

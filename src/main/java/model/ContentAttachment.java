@@ -7,7 +7,8 @@ public class ContentAttachment {
     private byte[] data;
     private String fileName;
 
-    public ContentAttachment() {}
+    public ContentAttachment() {
+    }
 
     public ContentAttachment(String fileName, byte[] data) {
         this.data = data;

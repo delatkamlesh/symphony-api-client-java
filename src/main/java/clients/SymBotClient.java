@@ -3,17 +3,7 @@ package clients;
 import authentication.ISymAuth;
 import authentication.SymBotAuth;
 import authentication.SymBotRSAAuth;
-import clients.symphony.api.AdminClient;
-import clients.symphony.api.ConnectionsClient;
-import clients.symphony.api.DatafeedClient;
-import clients.symphony.api.FirehoseClient;
-import clients.symphony.api.HealthcheckClient;
-import clients.symphony.api.InformationBarriersClient;
-import clients.symphony.api.MessagesClient;
-import clients.symphony.api.PresenceClient;
-import clients.symphony.api.SignalsClient;
-import clients.symphony.api.StreamsClient;
-import clients.symphony.api.UsersClient;
+import clients.symphony.api.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +12,7 @@ import configuration.SymConfig;
 import configuration.SymConfigLoader;
 import configuration.SymLoadBalancedConfig;
 import exceptions.AuthenticationException;
+import javax.ws.rs.client.Client;
 import model.UserInfo;
 import org.apache.commons.codec.binary.Base64;
 import org.glassfish.jersey.client.ClientConfig;
@@ -31,8 +22,6 @@ import services.DatafeedEventsService;
 import services.FirehoseService;
 import utils.HttpClientBuilderHelper;
 import utils.SymMessageParser;
-
-import javax.ws.rs.client.Client;
 
 public final class SymBotClient implements ISymClient {
     private static final Logger logger = LoggerFactory.getLogger(SymBotClient.class);
@@ -178,16 +167,16 @@ public final class SymBotClient implements ISymClient {
 
         this.podClient = HttpClientBuilderHelper.getHttpClientBuilderWithTruststore(config).withConfig(podConfig).build();
         this.agentClient = HttpClientBuilderHelper.getHttpClientBuilderWithTruststore(config).withConfig(agentConfig).build();
-        
+
         this.botUserInfo = parseUserFromSessionToken(symBotAuth.getSessionToken());
-        
+
         if (this.botUserInfo == null) {
             logger.debug("Calling getSessionUser to get bot info.");
             getBotUserInfo();
         }
-        
+
         SymMessageParser.createInstance(this);
-        
+
         reportIfLoadBalanced(config);
     }
 
@@ -205,7 +194,7 @@ public final class SymBotClient implements ISymClient {
             logger.debug("Calling getSessionUser to get bot info.");
             getBotUserInfo();
         }
-        
+
         SymMessageParser.createInstance(this);
 
         reportIfLoadBalanced(config);
@@ -245,14 +234,14 @@ public final class SymBotClient implements ISymClient {
         }
         return botUserInfo;
     }
-    
+
     public String getBotUsername() {
         if (botUserInfo == null || botUserInfo.getUsername() == null) {
             getBotUserInfo();
         }
         return botUserInfo.getUsername();
     }
-    
+
     public long getBotUserId() {
         if (botUserInfo == null || botUserInfo.getId() == null) {
             getBotUserInfo();
